@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ege Akman</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      overflow-x: hidden;
+    }
+
+::-webkit-scrollbar {
+  display: none;
+}
+html {
+  scrollbar-width: none;
+}
+
+    body {
+      color: #fff;
+      background: #111;
+    }
+
+    /* Giriş ekranı */
+    .entry-screen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 10;
+      transition: opacity 0.5s ease;
+    }
+
+    .entry-screen h1 {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    .entry-screen button {
+      padding: 12px 24px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      transition: background 0.2s;
+      margin: 5px;
+    }
+
+    .entry-screen button:hover {
+      background: rgba(255,255,255,0.4);
+    }
+
+    /* Arka plan video */
+    .video-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      display: none; 
+    }
+
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: none; 
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.45);
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin-bottom: 2rem;
+    }
+
+    .links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .links a {
+      text-decoration: none;
+      color: #fff;
+      background: rgba(255,255,255,0.15);
+      padding: 10px 16px;
+      border-radius: 999px;
+      transition: background 0.2s;
+    }
+
+    .links a:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+
+    .sections {
+      position: relative;
+      background: #111;
+      color: #eee;
+      padding: 60px 20px;
+      display: none; 
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 1000px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    .card h2 {
+      margin-bottom: 12px;
+      font-size: 1.4rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card p {
+      font-size: 1rem;
+      color: #ccc;
+      margin: 0;
+    }
+
+
+    #music-toggle {
+      position: fixed;
+      bottom: 20px; left: 20px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      z-index: 20;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="entry-screen" id="entry-screen">
+    <h1>FOX 3 @ YOUR TAIL :)</h1>
+    <button onclick="enterSite()">Notch & Deploy Chaff</button>
+    <button onclick="wrongAnswer()">Deploy Flare</button>
+    <div id="wrong-msg" style="color: #ff5555; margin-top: 10px; display: none;">
+      Yanlış cevap, vuruldun.
+    </div>
+  </div>
+
+  <video id="bg-video" loop playsinline class="video-bg">
+    <source src="background.mp4" type="video/mp4" />
+    Tarayıcınız video etiketini desteklemiyor.
+  </video>
+
+  <audio id="correct-sound" src="dogrucevap.mp3"></audio>
+  <audio id="wrong-sound" src="yanliscevap.mp3"></audio>
+
+  <section class="hero" id="hero">
+    <h1>Ege Akman</h1>
+    <p>ABÜ Bilgisayar Programcılığı Öğrencisi / Savaş Teknolojisi Meraklısı</p>
+    <div class="links">
+      <a href="mailto:egeakman200707@gmail.com">✉️ E-posta</a>
+      <a href="https://github.com/Lawlos-s" target="_blank">🐙 GitHub</a>
+    </div>
+  </section>
+
+  <section class="sections" id="sections">
+    <div class="section-grid">
+      <div class="card">
+        <h2>🙋‍♂️ Ben Kimim?</h2>
+        <p>
+          İsmim Ege, 2007 Doğumluyum ve Antalya'da yaşıyorum, 
+          Bilim Üniversitesi Bilgisayar Programcılığı bölümü öğrencisiyim, 
+          ortalama derecede Python ve Lua biliyorum. 
+          Donanım ve teknik bakımdan bilgiliyim, savaş sanayisi ve teknolojisine büyük bir ilgim var. 
+          Metal ve Elektronik müzik dinlemeyi seviyorum.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>💻 Ne Yapıyorum?</h2>
+        <p>
+          Genel olarak bilgisayar başında vakit geçirmekle birlikte yeni şeyler öğrenmeye 
+          ve teknolojiye daha çok hakim olmaya çalışıyorum, hayalim ise bu konuda kendimi 
+          olabildiğince geliştirip iyi bir noktaya gelebilmek.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>🚀 Hedeflerim?</h2>
+        <p>
+          Gelecekte bilindik bir savaş sanayi firmasında yazılımcı veya teknik departman 
+          ünvanında çalışmak istiyorum ve bu konuda yeni şeylere imza atabileceğime inanıyorum, 
+          bazen hayal gücümle bir şeyleri gerçekleştirebilseydim diye umuyorum çünkü aklımda 
+          unutmak istemediğim çok proje ve fikir var.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const video = document.getElementById('bg-video');
+    const hero = document.getElementById('hero');
+    const sections = document.getElementById('sections');
+    const entry = document.getElementById('entry-screen');
+    const correctSound = document.getElementById('correct-sound');
+    const wrongSound = document.getElementById('wrong-sound');
+    const wrongMsg = document.getElementById('wrong-msg');
+
+    function enterSite() {
+      correctSound.play();
+      entry.style.opacity = '0';
+      setTimeout(() => entry.style.display = 'none', 500); // fade out
+      video.style.display = 'block';
+      hero.style.display = 'flex';
+      sections.style.display = 'flex';
+      video.play();
+    }
+
+    function wrongAnswer() {
+      wrongSound.play();
+      wrongMsg.style.opacity = '1';
+      wrongMsg.style.display = 'block';
+      wrongMsg.style.transition = 'opacity 1s';
+      setTimeout(() => {
+        wrongMsg.style.opacity = '0';
+        setTimeout(() => wrongMsg.style.display = 'none', 1000);
+      }, 0);
+    }
+  </script>
+</body>
+</html>
